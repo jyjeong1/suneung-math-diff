@@ -322,13 +322,14 @@ body {
 .pause-resume { background: var(--primary); color: #fff; }
 .pause-quit { background: var(--border); color: var(--text); }
 .passage {
-  background: var(--card);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
   border-radius: 12px;
   padding: 20px;
   font-size: 14px;
   line-height: 1.9;
+  color: var(--text);
   margin-bottom: 16px;
-  box-shadow: var(--shadow);
 }
 .passage .blank {
   background: #e8eaf6;
@@ -340,29 +341,30 @@ body {
 }
 .choices { display: flex; flex-direction: column; gap: 10px; }
 .choice-btn {
-  background: var(--card);
-  border: none;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
   border-radius: 12px;
   padding: 14px 16px;
   font-size: 14px;
   line-height: 1.6;
+  color: var(--text);
   cursor: pointer;
   text-align: left;
   transition: all 0.2s;
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  box-shadow: var(--shadow);
 }
 .choice-btn:active { transform: scale(0.98); }
-.choice-btn.selected { background: #e8f0fe; box-shadow: 0 0 0 2px var(--primary); }
-.choice-btn.correct { background: #edf7ed; box-shadow: 0 0 0 2px var(--correct); }
-.choice-btn.wrong { background: #fdecea; box-shadow: 0 0 0 2px var(--wrong); animation: wrongShake 0.3s; }
+.choice-btn.selected { background: rgba(249,115,22,0.15); border-color: var(--primary); box-shadow: 0 0 0 2px var(--primary); color: #fff; }
+.choice-btn.correct { background: rgba(34,197,94,0.15); border-color: var(--correct); box-shadow: 0 0 0 2px var(--correct); color: var(--correct); }
+.choice-btn.wrong { background: rgba(239,68,68,0.15); border-color: var(--wrong); box-shadow: 0 0 0 2px var(--wrong); color: var(--wrong); animation: wrongShake 0.3s; }
 .choice-btn .num {
   min-width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: var(--border);
+  background: rgba(255,255,255,0.1);
+  color: var(--text);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -387,7 +389,7 @@ body {
 .submit-btn:active { transform: scale(0.97); opacity: 0.85; }
 .submit-btn.primary { background: var(--primary); color: #fff; }
 .submit-btn.next { background: var(--correct); color: #fff; }
-.submit-btn:disabled { background: #e5e5ea; color: #aeaeb2; cursor: not-allowed; }
+.submit-btn:disabled { background: rgba(255,255,255,0.08); color: #555; cursor: not-allowed; }
 
 /* ── AI 해설 ── */
 .explanation {
