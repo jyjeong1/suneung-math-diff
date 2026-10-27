@@ -3316,9 +3316,19 @@ async function checkPremiumStatus() {
   if (!db || !fbUser) return;
   try {
     const doc = await db.collection('users').doc(fbUser.uid).get();
-    if (doc.exists && doc.data().isPremium_diff) {
-      state.isPremium = true;
-      localStorage.setItem(ukey('isPremium_diff'), 'true');
+    if (doc.exists) {
+      const d = doc.data();
+      if (d.isPremium_diff) {
+        const expiry = d.premiumExpiry_diff;
+        if (expiry && new Date(expiry) < new Date()) {
+          state.isPremium = false;
+          localStorage.removeItem(ukey('isPremium_diff'));
+          db.collection('users').doc(fbUser.uid).update({ isPremium_diff: false });
+        } else {
+          state.isPremium = true;
+          localStorage.setItem(ukey('isPremium_diff'), 'true');
+        }
+      }
     }
   } catch(e) {}
   updateMembershipUI();
