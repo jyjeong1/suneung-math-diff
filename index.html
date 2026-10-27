@@ -881,7 +881,7 @@ let state = {
   timerSeconds: 90,
   badges: JSON.parse(localStorage.getItem('badges') || '{}'),
   hasServerKey: false,
-  isPremium: localStorage.getItem(ukey('isPremium')) === 'true',
+  isPremium: localStorage.getItem(ukey('isPremium_diff')) === 'true',
 };
 
 // ═══════════════════════════════════════
@@ -1023,7 +1023,7 @@ function loadUserLocalData() {
   state.streak = parseInt(localStorage.getItem(ukey('streak')) || '0');
   state.lastDate = localStorage.getItem(ukey('lastDate')) || '';
   state.badges = JSON.parse(localStorage.getItem(ukey('badges')) || '{}');
-  state.isPremium = localStorage.getItem(ukey('isPremium')) === 'true';
+  state.isPremium = localStorage.getItem(ukey('isPremium_diff')) === 'true';
   updateStatsDisplay();
   updateStreak();
   updateFreeLimitStatus();
@@ -1099,7 +1099,7 @@ async function submitReferralCode() {
       rpScore: currentRP,
       referralCount: referralCount,
       premiumExpiry: premiumExpiry.toISOString(),
-      isPremium: true,
+      isPremium_diff: true,
       ...(giftEligible ? { pendingGift: firebase.firestore.FieldValue.increment(1) } : {}),
     });
 
@@ -3316,9 +3316,9 @@ async function checkPremiumStatus() {
   if (!db || !fbUser) return;
   try {
     const doc = await db.collection('users').doc(fbUser.uid).get();
-    if (doc.exists && doc.data().isPremium) {
+    if (doc.exists && doc.data().isPremium_diff) {
       state.isPremium = true;
-      localStorage.setItem(ukey('isPremium'), 'true');
+      localStorage.setItem(ukey('isPremium_diff'), 'true');
     }
   } catch(e) {}
   updateMembershipUI();
